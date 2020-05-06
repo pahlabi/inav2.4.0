@@ -1,0 +1,264 @@
+2.2.3
+19-01-07
+
+Th CH3
+Roll CH1
+pitch ch2
+yak ch4
+ 
+
+Configurator: 10.6.0
+Firmware: BTFL 3.3.3
+Target: MKF7
+
+
+Configurator: 10.6.0
+Firmware: BTFL 4.0.4
+Target: MATEKF722SE
+
+
+Big Quad:
+
+Configurator: 10.6.0
+Firmware: BTFL 4.1.6
+Target: MTKS/MATEKF722SE(STM32F7X2
+
+Fix Receiver for FrySky Fport on CLI:
+======================================
+set serialrx_halfduplex = ON
+set serialrx_inverted = ON
+set gps_rescue_allow_arming_without_fix = on
+set gps_rescue_angle = 40
+set failsafe_procedure = GPS_RESCUE(always check this from cli before fly)
+
+
+
+1. Metric
+2. Command line: get gps_rescue
+3.gps_rescue_initial_alt = 50-100
+4. Gps_rescue_min_dth = 100 
+5. gps_rescue_descent_distance = 200
+6. gps_rescue_ground_speed = 2000/sec
+7. gps_rescue_angle = 32 to 45 (good for wind)
+
+
+Guardtime for stage 2 activation after signal lost = 4
+
+Dynamic Idel(Set all motor idel speed for smooth spining):
+=============================================================
+
+Modes: Gps rescue mode
+
+1. get idle
+dshot_idle_value = 550 (correspond to GUI) 5.5% for resposive = 
+
+set idle_min_rpm = 12 (14 for 5 inch)
+
+Battery Callibration:
+
+
+Configurator: 10.6.0
+Firmware: BTFL 4.1.6
+Target: MTKS/MATEKF722SE(STM32F7X2
+
+iFlight SucceX 50A 2-6s ESC 32bit BLHeli 32 4-in-1 ESC with Telemetry Pad Built in Current Sensor DSHOT1200 for FPV Racing Drone Quadcopter
+
+
+ ===============================================
+Taranis Dashboard Config:
+https://github.com/iNavFlight/LuaTelemetry/wiki/
+INAV Configurator Telemetry Setup:
+==================================
+Setup SmartPort(S.Port), F.Port, D-series, or Crossfire telemetry to send to your transmitter: INAV telemetry docs
+FrSky receivers (skip for TBS Crossfire):
+If you have an current sensor and want to show fuel percent remaining:
+set smartport_fuel_unit = PERCENT
+Set battery_capacity to the mAh you want to draw from your battery
+If instead you want to show the current sensor's mAh:
+set smartport_fuel_unit = MAH
+With INAV v2.0.0+, set frsky_pitch_roll = ON in CLI settings for accurate attitude display and pitch angle
+
+##Download the latest LuaTelemetry.zip file (Note: NOT the source code)
+Copy the contents of the ZIP file (SCRIPTS and WIDGETS folders) to the transmitter's SD card's root.
+
+Add Telemetry Sensors to Transmitter:
+======================================
+With battery connected and after GPS fix discover telemetry sensors so all telemetry sensors are discovered
+FrSky receivers (skip for TBS Crossfire):
+Telemetry distance sensor name 0420 (or 0007 with D-series receivers) should be changed to Dist and set to the desired unit: m or ft
+The sensors Dist, Alt, GAlt and Gspd can be changed to the desired unit: m or ft / kmh or mph
+If you set frsky_pitch_roll = ON on INAV v2.0.0+ (which I suggest) you can optionally change the following for clarification:
+Telemetry sensor 0430 (or 0008 with D-series receivers) can be changed to Ptch
+Telemetry sensor 0440 (or 0020 with D-series receivers) can be changed to Roll
+Don't change Tmp1 or Tmp2 from Celsius to Fahrenheit! They're not temps (used for flight modes and GPS info)
+If you don't have a current sensor, you can optionally delete or rename the Fuel sensor so it doesn't show in Lua Telemetry
+
+on Taranis:
+===========
+In model setup, page to DISPLAY
+Set desired screen to Script
+Select iNav
+Taranis:
+From the main screen on your transmitter, long-press Page (down d-pad on X-Lite)
+If Lua Telemetry isn't on your first page, short-press Page to the Lua Telemetry screen
+
+
+
+inav 2.4.1
+
+#dump (see all config)
+#diff (only the current config apart from default config)
+
+
+
+set gps_rescue_allow_arming_without_fix = on
+diff
+
+# version
+# INAV/MATEKF722SE 2.4.0 Feb 11 2020 / 22:53:38 (bcd4caef9)
+# GCC-8.2.1 20181213 (release) [gcc-8-branch revision 267074]
+
+# start the command batch
+batch start
+
+# resources
+
+# mixer
+mmix 0  1.000 -1.000  1.000 -1.000
+mmix 1  1.000 -1.000 -1.000  1.000
+mmix 2  1.000  1.000  1.000  1.000
+mmix 3  1.000  1.000 -1.000 -1.000
+
+# servo mix
+
+# servo
+
+# logic
+
+# gf
+
+# feature
+feature GPS
+feature PWM_OUTPUT_ENABLE
+
+# beeper
+
+# map
+
+# serial
+serial 0 2 115200 115200 0 115200
+serial 3 2048 115200 115200 0 115200
+serial 5 1 115200 115200 0 115200
+
+# led
+
+# color
+
+# mode_color
+
+# aux
+aux 0 0 0 1300 2100
+aux 1 1 2 900 1125
+aux 2 9 2 1300 1700
+aux 3 8 2 1725 2100
+
+# adjrange
+
+# rxrange
+
+# temp_sensor
+
+# wp
+#wp 0 invalid
+
+# osd_layout
+
+# master
+set looptime = 500
+set gyro_hardware_lpf = 256HZ
+set gyro_lpf_hz = 90
+set gyro_notch1_hz = 200
+set gyro_notch1_cutoff = 100
+set acc_hardware = MPU6000
+set acczero_x = 9
+set acczero_y = 32
+set acczero_z = -137
+set accgain_x = 4064
+set accgain_y = 4068
+set accgain_z = 4078
+set rangefinder_hardware = MSP
+set opflow_hardware = MSP
+set opflow_scale =  6.090
+set mag_hardware = HMC5883
+set magzero_x = 12
+set magzero_y = -121
+set magzero_z = 293
+set baro_hardware = BMP280
+set pitot_hardware = ADC
+set serialrx_provider = FPORT
+set serialrx_inverted = ON
+set serialrx_halfduplex = ON
+set motor_pwm_rate = 16000
+set motor_pwm_protocol = DSHOT1200
+set failsafe_procedure = RTH
+set model_preview_type = 3
+set applied_defaults = 1
+set gps_sbas_mode = AUTO
+set nav_rth_alt_mode = AT_LEAST_LINEAR_DESCENT
+set nav_rth_altitude = 5000
+set frsky_pitch_roll = ON
+set smartport_fuel_unit = PERCENT
+set debug_mode = FLOW_RAW
+
+# profile
+profile 1
+
+set mc_p_pitch = 58
+set mc_i_pitch = 50
+set mc_d_pitch = 22
+set mc_p_roll = 43
+set mc_i_roll = 40
+set mc_d_roll = 20
+set mc_p_yaw = 70
+set dterm_lpf_hz = 80
+set dterm_notch_hz = 200
+set dterm_notch_cutoff = 100
+set roll_rate = 50
+set pitch_rate = 50
+set yaw_rate = 45
+
+# battery_profile
+battery_profile 1
+
+set battery_capacity = 3000
+
+# end the command batch
+batch end
+
+# 
+
+Flight Mode Setup:
+
+NAV ALTHOLD
+NAV POSHOLD
+NAV CRUISE
+NAV RTH
+NAV WP
+GCS NAV
+
+ACC MAG sensor need calibration, 3d fix on FC
+set nav_extra_arming_safety = ON/OFF
+
+
+ARM 	- 	CH6 Down
+ANGEL - 	CH8 Down
+AIR MODE - 	CH8 UP
+NAV ALTHOLD - 	CH5 UP (1300-2100)
+SURFACE - 	CH5 UP (1700-2100)
+NAV POSHOLD - 	CH5 MiddleUP (1300-2100)
+NAV RTH - 	CH7 UP (1700-2100)
+NAV WP - 	CH9 MID+UP (1300-2100)
+HOME Reset - 	CH9 UP 	   (1700-2100)
+
+
+
