@@ -1,0 +1,25 @@
+Client 1
+ssh-keygen -t rsa
+
+Upload Key:
+
+scp /root/.ssh/id_rsa.pub root@173.82.48.131:/root/.ssh/authorized_key
+s
+
+autossh -M 0 -f -N -R 11001:192.168.101.8:80 173.82.48.131 
+autossh -M 21107 -f -N -R 11005:192.168.101.8:80 173.82.74.165
+
+client 2:
+
+Download key from server
+
+scp root@173.82.48.131:/root/.ssh/authorized_keys /root/.ssh
+
+ssh-keygen -t rsa
+
+
+cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
+
+scp /root/.ssh/authorized_keys root@173.82.48.131:/root/.ssh/authorized_key
+s
+
