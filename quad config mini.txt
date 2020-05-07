@@ -109,6 +109,13 @@ Precheck inav:
 4. gyro_ipf =256Hz(higher value is higher sensitivity if lot of vibration on small quad then reduce the value to adjast with vibration 256Hz)
 5. gyro_sync = on
 6. gyro_sync_denom = 8 (means 1KHz pid rate)
+7. Must set a failsafe button on Modes.
+
+For RTH value:
+set looptime = 2000
+set min_check = 1100
+set max_check = 1900
+set nav_extra_arming_safety = Off (disable GPS if u want to disable)
 
 inav 2.4.1
 
