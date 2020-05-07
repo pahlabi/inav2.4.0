@@ -102,7 +102,13 @@ Taranis:
 From the main screen on your transmitter, long-press Page (down d-pad on X-Lite)
 If Lua Telemetry isn't on your first page, short-press Page to the Lua Telemetry screen
 
-
+Precheck inav:
+1. Need to calibrate Mag (Never use FC internal Mag always use external GPS compass) and ACC 6 way 
+2. cover barometa with a small peace of foam to protect from heat wind and light.
+3. set nav_mc_hover_thr = XXXX (on test flight which posting is the stable hover position. Find by using althold and poshold mode)
+4. gyro_ipf =256Hz(higher value is higher sensitivity if lot of vibration on small quad then reduce the value to adjast with vibration 256Hz)
+5. gyro_sync = on
+6. gyro_sync_denom = 8 (means 1KHz pid rate)
 
 inav 2.4.1
 
